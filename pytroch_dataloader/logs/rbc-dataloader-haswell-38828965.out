@@ -1,0 +1,15 @@
+****** Benchmarking reading from scratch ******
+Sat Feb  6 21:21:37 2021: [unset]:_pmi_alps_init:alps_get_placement_info returned with error -1
+Sat Feb  6 21:21:37 2021: [unset]:_pmi_init:_pmi_alps_init returned -1
+Found 1 at path /global/cscratch1/sd/jpathak/rbc2d/dataSR/dedalus/upsampled/raw/chunks/testing_pairs_1.h5. Number of examples: 10000
+epoch 0
+epoch 1
+epoch 2
+Timing: 124.54526753699149 samples/s
+
+****** Benchmarking reading from xfs ******
+Found 1 at path /tmp_xfs/file.h5. Number of examples: 10000
+epoch 0
+epoch 1
+epoch 2
+Timing: 123.81029412897632 samples/s

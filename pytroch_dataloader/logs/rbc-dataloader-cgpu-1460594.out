@@ -1,0 +1,24 @@
+****** Benchmarking reading from scratch ******
+Found 1 at path /global/cscratch1/sd/jpathak/rbc2d/dataSR/dedalus/upsampled/raw/chunks/testing_pairs_1.h5. Number of examples: 10000
+epoch 0
+epoch 1
+epoch 2
+Timing: 69.03558304266218 samples/s
+
+****** Benchmarking reading from nvme ******
+Copying data file to nvme...
+real	4m40.306s
+user	0m0.037s
+sys	1m30.415s
+Found 1 at path /tmp/file.h5. Number of examples: 10000
+epoch 0
+epoch 1
+epoch 2
+Timing: 260.5607190054666 samples/s
+
+****** Benchmarking reading from xfs ******
+Found 1 at path /tmp/file.h5. Number of examples: 10000
+epoch 0
+epoch 1
+epoch 2
+Timing: 82.62451826298206 samples/s
