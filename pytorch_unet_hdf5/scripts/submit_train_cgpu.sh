@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --time=1:20:00
+#SBATCH --time=1:00:00
 #SBATCH -C gpu
 #SBATCH --account=m1759
 #SBATCH --nodes=1
@@ -16,9 +16,11 @@ module load pytorch/1.7.1-gpu
 set -f
 data_file="/global/cscratch1/sd/jpathak/rbc2d/dataSR/dedalus/upsampled/raw/chunks/testing_pairs_1.h5"
 
+N_GPUS = 1
+
 printf "****** Benchmarking reading from scratch ******\n"
-# python -m torch.distributed.launch --nproc_per_node=8 \
-python benchmark.py --files_pattern $data_file \
+python -m torch.distributed.launch --nproc_per_node=$N_GPUS \
+       benchmark.py --files_pattern $data_file \
                     --batch_size 64 \
                     --crop_size 256 \
                     --num_data_workers 4
@@ -32,8 +34,8 @@ set +f
 time cp $data_file /tmp/
 
 set -f
-# python -m torch.distributed.launch --nproc_per_node=8 \
-python benchmark.py --files_pattern /tmp/* \
+python -m torch.distributed.launch --nproc_per_node=$N_GPUS \
+       benchmark.py --files_pattern /tmp/* \
                     --batch_size 64 \
                     --crop_size 256 \
                     --num_data_workers 4

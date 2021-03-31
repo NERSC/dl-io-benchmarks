@@ -3,6 +3,7 @@ import torch
 import random
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
+import torch.distributed as dist
 from torch import Tensor
 import h5py
 
@@ -35,11 +36,13 @@ class GetDataset(Dataset):
     self.n_samples = self.n_files * self.n_samples_per_file
 
     if self.crop_size and (self.inp_size != self.tar_size):
-      print("ERROR: Cropping is not implemented if input and target are not the same size. Aborting ...")
+      if dist.get_rank() == 0:
+        print("ERROR: Cropping is not implemented if input and target are not the same size. Aborting ...")
       exit()
 
     self.files = [None for _ in range(self.n_files)]
-    print("Found {} at path {}. Number of examples: {}".format(self.n_files, self.files_pattern, self.n_samples))
+    if dist.get_rank() == 0:
+      print("Found {} at path {}. Number of examples: {}".format(self.n_files, self.files_pattern, self.n_samples))
 
   def _open_file(self, ifile):
     self.files[ifile] = h5py.File(self.files_paths[ifile], 'r')
