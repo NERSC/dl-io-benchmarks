@@ -19,7 +19,8 @@ data_file="/global/cscratch1/sd/jpathak/rbc2d/dataSR/dedalus/upsampled/raw/chunk
 printf "****** Benchmarking reading from scratch ******\n"
 # python -m torch.distributed.launch --nproc_per_node=8 \
 python benchmark.py --files_pattern $data_file \
-                    --batch_size 16 \
+                    --batch_size 64 \
+                    --crop_size 256 \
                     --num_data_workers 4
 
 
@@ -33,5 +34,6 @@ time cp $data_file /tmp/
 set -f
 # python -m torch.distributed.launch --nproc_per_node=8 \
 python benchmark.py --files_pattern /tmp/* \
-                    --batch_size 16 \
+                    --batch_size 64 \
+                    --crop_size 256 \
                     --num_data_workers 4

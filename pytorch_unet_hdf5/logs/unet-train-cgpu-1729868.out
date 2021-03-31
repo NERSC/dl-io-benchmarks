@@ -1,0 +1,21 @@
+****** Benchmarking reading from scratch ******
+Namespace(batch_size=64, crop_size=256, dataloader_only=False, epochs=2, files_pattern='/global/cscratch1/sd/jpathak/rbc2d/dataSR/dedalus/upsampled/raw/chunks/testing_pairs_1.h5', forward_only=False, max_batches_per_epoch=100, num_data_workers=4)
+Found 1 at path /global/cscratch1/sd/jpathak/rbc2d/dataSR/dedalus/upsampled/raw/chunks/testing_pairs_1.h5. Number of examples: 10000
+Running in training (forward/backward) mode ...
+epoch 0
+epoch 1
+epoch 2
+Timing: 37.04916698602669 samples/s
+
+****** Benchmarking reading from nvme ******
+Copying data file to nvme...
+real	6m19.993s
+user	0m0.045s
+sys	1m34.342s
+Namespace(batch_size=64, crop_size=256, dataloader_only=False, epochs=2, files_pattern='/tmp/*', forward_only=False, max_batches_per_epoch=100, num_data_workers=4)
+Found 1 at path /tmp/*. Number of examples: 10000
+Running in training (forward/backward) mode ...
+epoch 0
+epoch 1
+epoch 2
+Timing: 61.428477780049754 samples/s
