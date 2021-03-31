@@ -1,5 +1,8 @@
-## pytorch-dataloader
-Benchmark data loading only, no network training.
+## pytorch-unet-hdf5
+Three benchmark options:  
+- dataloading only
+- forward model only (inference)
+- forward/backward (training)
 
 ## Installation
 Create a Python 3 conda environment (either with the anaconda installer or
@@ -47,12 +50,14 @@ $ python benchmark_dataloader.py \
 ```
 
 ### Usage on Cori
-To submit a cgpu test, use [submit_cgpu.sh](submit_cgpu.sh). The script will
+To submit a cgpu test, use [submit_dataloader_cgpu.sh](submit_dataloader_cgpu.sh). The script will
 test three cases: reading directly from Lustre scratch, reading from cgpu nvme
 nodes, reading from a shifter perNodeCache (XFS file).
 
-You can use [submit_haswell.sh](scripts/submit_haswell.sh) to test reading from
+You can use [submit_dataloader_haswell.sh](scripts/submit_dataloader_haswell.sh) to test reading from
 Lustre from a Haswell node.
 
-The latest benchmarks and the logs of runs you perform on Cori can be found in
-the [logs](logs) directory.
+To test with a UNet in the loop see [submit_train_cgpu.sh](scripts/submit_train_cgpu.sh).
+
+### Results:
+See latest benchmarks in the [logs](logs).
